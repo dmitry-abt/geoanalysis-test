@@ -1,7 +1,7 @@
 from qgis.core import QgsProject
 
-# имя слоя 
-layer_name = "gis_osm_buildings_a_free_1"  
+# имя слоя   
+layer_name = "poi-point"  
 
 # получение слоя из проекта
 layer = QgsProject.instance().mapLayersByName(layer_name)[0]
@@ -19,13 +19,13 @@ social_amenities = {"school", "hospital", "library", "kindergarten",
 # фильтрация объектов
 filtered_features = []
 for feature in layer.getFeatures():
-    if(feature["type"]):
+    if(feature["amenity"]):
         attrs = feature.__geo_interface__
         
-        if feature["type"] in social_amenities:
+        if feature["amenity"] in social_amenities:
             attrs = feature.__geo_interface__
             
-            print(feature["type"])
+            print(feature["amenity"])
             
             # добавление социального объекта в список результатов
             filtered_features.append(feature)
